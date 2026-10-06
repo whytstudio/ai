@@ -1,0 +1,604 @@
+/* ==========================================================================
+   WHYT.studio - Scroll-Driven Hero Section Stylesheet
+   32 Vertical Cards & Seamless Outward Parting Scroll Interaction
+   ========================================================================== */
+
+:root {
+  --hero-card-w: clamp(175px, 14vw, 215px);
+  --hero-card-h: clamp(285px, 22.5vw, 345px);
+  --hero-card-r: 20px;
+  --hero-grid-gap: 20px;
+  --hero-tilt-start: -18deg;
+}
+
+/* Ensure site navigation stays above the hero stage */
+.hp-head {
+  z-index: 100 !important;
+}
+
+/* Scroll indicator pill */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  background: rgba(18, 18, 22, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--fg-2, #a1a1aa);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  /* The scroll timeline owns opacity and transform; CSS must not trail it. */
+}
+
+.hero-scroll-indicator .scroll-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* Hero section wrapper */
+.hero-scroll-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg, #09090b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Viewport stage */
+.hero-scroll-viewport {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Same stage and two-screen scroll distance as the former GSAP pin. Native
+   sticky keeps both scroll directions and resize measurements in normal flow. */
+.hero-scroll-container.hero-scroll-ready {
+  height: 300vh;
+  height: 300dvh;
+  display: block;
+  overflow: clip;
+}
+
+.hero-scroll-ready .hero-scroll-viewport {
+  position: sticky;
+  top: 0;
+  inset-inline: auto;
+  bottom: auto;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Ambient Edge Shadows & Vignette */
+.hero-scroll-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  box-shadow: inset 0 0 140px 50px rgba(9, 9, 11, 0.88);
+  background: radial-gradient(circle at center, transparent 35%, rgba(9, 9, 11, 0.5) 100%);
+}
+
+/* Center Dark Radial Backing for supreme text contrast */
+.hero-scroll-center-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(840px, 88vw);
+  height: min(580px, 80vh);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(9, 9, 11, 0.96) 0%, rgba(9, 9, 11, 0.78) 50%, rgba(9, 9, 11, 0) 80%);
+  pointer-events: none;
+  z-index: 26;
+  opacity: 0;
+  /* Direct scroll opacity, with no independent transition after scrolling stops. */
+}
+
+/* ==================================================================
+   ROTATED CARD CANVAS (2D STAGGERED 4-ROW MASONRY - 32 CARDS)
+   ================================================================== */
+.hero-card-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3200px;
+  height: 2200px;
+  transform: translate(-50%, -50%) rotate(var(--hero-tilt-start));
+  transform-origin: center center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--hero-grid-gap);
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.hero-card-row {
+  display: flex;
+  gap: var(--hero-grid-gap);
+  width: max-content;
+  will-change: transform;
+}
+
+.hero-card-row-1 { transform: translateX(-140px); }
+.hero-card-row-2 { transform: translateX(80px); }
+.hero-card-row-3 { transform: translateX(-100px); }
+.hero-card-row-4 { transform: translateX(140px); }
+
+/* ==================================================================
+   VERTICAL CARD STYLING (PORTRAIT ORIENTATION)
+   ================================================================== */
+.hero-canvas-card {
+  position: relative;
+  flex: none;
+  width: var(--hero-card-w);
+  height: var(--hero-card-h);
+  border-radius: var(--hero-card-r);
+  overflow: hidden;
+  background: var(--card, #121215);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.2);
+  will-change: transform;
+  contain: layout style paint;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.hero-canvas-card:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6);
+}
+
+/* Video inside Card (Vertical Fit) */
+.hero-canvas-card video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+/* Preserve the full Lumera artwork within the existing card. */
+.hero-canvas-card .hero-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  z-index: 1;
+}
+
+/* Card Badge Tag */
+.hero-canvas-card .card-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 4;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Bottom Info Overlay on Video Cards */
+.hero-canvas-card .card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 42px 14px 14px;
+  background: linear-gradient(to top, rgba(9, 9, 11, 0.92) 0%, rgba(9, 9, 11, 0.5) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-canvas-card .card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.hero-canvas-card .card-desc {
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--fg-2, #a1a1aa);
+  line-height: 1.25;
+}
+
+/* --- SPECIAL CARD: COBALT BLUE VISA CARD (Vertical Portrait) --- */
+.hero-card-visa-blue {
+  background: linear-gradient(145deg, #0e37ee 0%, #0821a8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 16px;
+  color: #ffffff;
+}
+
+.hero-card-visa-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.hero-visa-logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  font-style: italic;
+}
+
+.hero-visa-brand-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-visa-brand-text::before {
+  content: '';
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.hero-card-visa-curves {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.hero-card-visa-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-visa-dots-num {
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 11.5px;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+}
+
+.hero-visa-subtag {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* --- SPECIAL CARD: UI DASHBOARD SPENDING/ROAS CARD --- */
+.hero-card-dashboard {
+  background: #101014;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 14px;
+  color: #ffffff;
+}
+
+.hero-dash-header-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hero-dash-title {
+  font-size: 10.5px;
+  color: var(--fg-2, #a1a1aa);
+  font-weight: 500;
+}
+
+.hero-dash-val-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.hero-dash-val {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-dash-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 100px;
+  font-size: 9.5px;
+  font-weight: 600;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.hero-dash-chart-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px;
+  height: 80px;
+  padding-top: 10px;
+}
+
+.hero-dash-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.hero-dash-bar-bg {
+  width: 100%;
+  max-width: 12px;
+  height: 100%;
+  background: #1f1f26;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-dash-bar-fill {
+  width: 100%;
+  border-radius: 100px;
+  background: #b8dcff;
+}
+
+.hero-dash-bar-fill.active {
+  background: #60a5fa;
+  box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
+}
+
+.hero-dash-day {
+  font-size: 8.5px;
+  color: var(--fg-muted, #71717a);
+  font-weight: 600;
+}
+
+/* --- SPECIAL CARD: FLUID GRADIENT ART CARD --- */
+.hero-card-fluid-gradient {
+  background: linear-gradient(145deg, #fb923c 0%, #ec4899 45%, #6366f1 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 16px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-fluid-inner-glow {
+  position: absolute;
+  top: -15%;
+  right: -15%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* --- SPECIAL CARD: MINIMAL MATTE SILVER CARD --- */
+.hero-card-silver {
+  background: linear-gradient(145deg, #2d3036 0%, #1a1b1f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 16px;
+  color: #ffffff;
+}
+
+/* --- SPECIAL CARD: MINIMAL PEARL WHITE CARD --- */
+.hero-card-pearl-white {
+  background: linear-gradient(145deg, #f5f5f7 0%, #e1e1e6 100%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 16px;
+  color: #09090b;
+}
+
+.hero-card-pearl-white .hero-visa-logo-text { color: #09090b; }
+.hero-card-pearl-white .hero-visa-brand-text { color: #09090b; }
+.hero-card-pearl-white .hero-visa-brand-text::before { background: #09090b; }
+.hero-card-pearl-white .hero-visa-dots-num { color: #27272a; }
+.hero-card-pearl-white .hero-visa-subtag { color: #52525b; }
+
+/* ==================================================================
+   CENTER HERO CONTENT (REVEALED ON SCROLL)
+   ================================================================== */
+.hero-scroll-center-content {
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vw, 48px);
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.hero-scroll-center-content .hero-badge-agency {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line-strong, rgba(255, 255, 255, 0.22));
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-scroll-center-content .hero-title {
+  font-size: clamp(20px, 2.2vw, 32px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--fg, #ffffff);
+  text-wrap: balance;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+}
+
+.hero-scroll-center-content .hero-subtitle {
+  margin: clamp(10px, 1.4vh, 15px) auto 0;
+  max-width: 820px;
+  font-size: clamp(12px, 0.95vw, 13.5px);
+  line-height: 1.55;
+  letter-spacing: 0.005em;
+  color: var(--fg-2, #a1a1aa);
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+
+.hero-scroll-center-content .hero-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(16px, 2.2vh, 24px);
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+.hero-scroll-center-content .hero-benefits-row {
+  margin-top: clamp(12px, 1.6vh, 18px);
+  font-size: 11px;
+  color: var(--fg-2, #a1a1aa);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 18px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* ==================================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================================== */
+@media (max-width: 992px) {
+  :root {
+    --hero-card-w: clamp(155px, 18vw, 190px);
+    --hero-card-h: clamp(245px, 28vw, 300px);
+    --hero-grid-gap: 16px;
+    --hero-tilt-start: -14deg;
+  }
+
+  .hero-card-canvas {
+    width: 2700px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --hero-card-w: 135px;
+    --hero-card-h: 215px;
+    --hero-card-r: 16px;
+    --hero-grid-gap: 12px;
+    --hero-tilt-start: -12deg;
+  }
+
+  .hero-card-canvas {
+    width: 2200px;
+  }
+
+  .hero-scroll-center-content .hero-title {
+    font-size: clamp(17px, 4.5vw, 22px);
+  }
+
+  .hero-scroll-center-content .hero-subtitle {
+    font-size: 11.5px;
+  }
+
+  .hero-scroll-center-content .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-scroll-center-content .hero-cta-group a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-scroll-center-content .hero-benefits-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

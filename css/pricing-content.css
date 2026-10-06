@@ -1,0 +1,43 @@
+/* Pricing content uses the site's existing package cards, sliders, and type. */
+#individual-pricing-grid .package-card{min-width:0}
+#individual-pricing-grid .package-head-row{align-items:flex-start}
+#individual-pricing-grid .package-title{min-width:0}
+#individual-pricing-grid .slider-header-row{gap:8px;flex-wrap:wrap}
+/* Share content rows across cards so wrapping titles and descriptions
+   cannot push one card's controls and prices below its neighbours. */
+@media(min-width:641px){
+  #services .make-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  #individual-pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #individual-pricing-grid .package-card{display:grid;grid-template-rows:subgrid;grid-row:span 7;row-gap:0}
+  #individual-pricing-grid .package-head-row{align-self:start}
+  #individual-pricing-grid .package-btn{min-width:0;white-space:normal;text-align:center;line-height:1.4}
+}
+@media(min-width:1100px){
+  #services .make-cards,#individual-pricing-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+  #services .make-card{display:grid;grid-template-rows:subgrid;grid-row:span 4;row-gap:0;padding:12px}
+  #services .make-body{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:0}
+  #services .make-titlerow{align-items:flex-start}
+  #services .make-cta{min-width:0;padding:11px 10px;white-space:normal;text-align:center;line-height:1.4}
+  #services .what-you-get-popover{justify-content:flex-start}
+  #individual-pricing-grid .package-card{padding:24px 18px}
+  #individual-pricing-grid .duration-slider-container{padding:14px 12px 12px}
+  #individual-pricing-grid .package-btn{padding:11px 10px}
+}
+@media(min-width:641px){
+  #individual-pricing-grid .package-head-row{flex-direction:column;align-self:stretch}
+}
+.pricing-price-line{flex-wrap:wrap;align-items:baseline;row-gap:5px}
+.pricing-usd{margin-left:6px;font-size:clamp(14px,1.6vw,19px);font-weight:600;color:var(--fg-2);white-space:nowrap}
+.pricing-unit-note,.pricing-turnaround{font-size:11px;line-height:1.45;color:var(--fg-2)}
+.pricing-unit-note{margin-top:8px}
+.pricing-turnaround{margin-top:8px}
+.pricing-original{font-size:11px;color:var(--fg-muted);text-decoration:line-through;margin-top:7px}
+.combined-packages-section{padding-top:clamp(20px,4vw,52px);border-top:1px solid var(--line)}
+.combined-packages-section .package-pricing-box{margin-top:16px}
+.combined-packages-section .package-card .package-items{margin-top:3px}
+@media(max-width:480px){
+  #individual-pricing-grid,#combined-pricing-grid{grid-template-columns:minmax(0,1fr)}
+  .packages-section .package-card{min-width:0}
+  .packages-section .package-head-row{flex-wrap:wrap}
+  .packages-section .package-btn{min-width:0;white-space:normal;text-align:center;line-height:1.4}
+}

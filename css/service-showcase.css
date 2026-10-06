@@ -1,0 +1,90 @@
+/* Service section cards: Full-size cards matching Portfolio section dimensions & styling */
+#services .make-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16 !important;
+  border-radius: clamp(14px, 1.4vw, 20px);
+  overflow: hidden;
+  background: var(--card, #111);
+  border: 1px solid var(--line);
+}
+#services .service-showcase > video,
+#services .service-showcase > img,
+#services .make-media > video,
+#services .make-media > img,
+#services .make-video-contain,
+#services .make-image-contain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block;
+  transition: opacity .22s ease;
+}
+#services .service-showcase > .service-media-entering,
+#services .service-showcase > .service-media-leaving { opacity: 0; }
+#services .service-media-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+#services .service-media-controls::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 76px;
+  background: linear-gradient(transparent,#000a);
+}
+#services .service-media-controls button {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 8px 12px;
+  border-radius: 24px;
+  border: 1px solid #ffffff40;
+  background: #09090bdf;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1.2;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background .15s ease, border-color .15s ease;
+}
+#services .service-media-controls [data-action="play"] { bottom: 12px; left: 12px; }
+#services .service-media-controls [data-action="next"] { bottom: 12px; right: 12px; }
+#services .service-media-controls button:hover { background: #27272a; }
+#services .service-media-controls button:active { background: #3f3f46; }
+#services .service-media-controls button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+#services .service-media-controls button:disabled { opacity: .5; cursor: default; }
+#services .service-media-controls svg { width: 15px; height: 15px; flex: none; }
+#services .service-media-controls [data-action="sound"],
+#services .service-media-count {
+  position: absolute;
+  top: 14px;
+  border: 1px solid #ffffff26;
+  border-radius: 30px;
+  background: #09090be6;
+  padding: 7px 10px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.2;
+}
+#services .service-media-controls [data-action="sound"] { right: 14px; gap: 6px; min-height: 0; }
+#services .service-media-controls [data-action="sound"][aria-pressed="true"] { background: #fff; color: #09090b; }
+#services .service-media-count { left: 14px; font-variant-numeric: tabular-nums; }
+#services .service-media-count:empty { display: none; }
+.service-media-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+/* Extend touch targets without changing the visible portfolio button size. */
+@media (pointer: coarse) {
+  #services .service-media-controls button::after { content: ''; position: absolute; inset: -7px -2px; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #services .service-showcase > video,#services .service-showcase > img,#services .service-media-controls button { transition: none; }
+}

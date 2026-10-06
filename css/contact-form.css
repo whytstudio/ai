@@ -1,0 +1,53 @@
+/* Keep the existing form theme while allowing every label and value to fit. */
+#contact .contact-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#contact .form-group { min-width: 0; }
+#contact .form-input,
+#contact .form-select,
+#contact .form-textarea { min-width: 0; line-height: 1.5; color-scheme: dark; }
+#contact .form-select option { color: #ffffff; background-color: #1b1b1e; }
+#contact .form-input::placeholder,
+#contact .form-textarea::placeholder { color: var(--fg-2); opacity: 1; }
+#contact .form-textarea { min-height: 9em; resize: vertical; }
+#contact .submit-btn { white-space: normal; line-height: 1.5; }
+#contact .toast-msg { grid-column: 1 / -1; }
+#contact .contact-footer-note,
+#contact .toast-msg { line-height: 1.65; overflow-wrap: anywhere; }
+
+/* The native select retains keyboard, touch, and form behaviour. Its visible
+   value can wrap instead of being clipped by a single-line native control. */
+.form-select-wrap { position: relative; min-width: 0; }
+#contact .form-select-wrap select {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+#contact .form-select-display {
+  display: block;
+  padding-right: 36px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.form-select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+#contact .form-select-wrap:focus-within .form-select-display {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+@media (max-width: 768px) {
+  #contact .contact-form { grid-template-columns: minmax(0, 1fr); }
+  #contact .form-textarea { min-height: 14em; }
+}

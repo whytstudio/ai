@@ -1,0 +1,465 @@
+/* ==========================================================================
+   WHYT.studio - Unified Theme: Soft Charcoal, Light Grey & Preserved White Glass
+   Production colour theme shared by all live pages.
+   Applies across the entire website consistently to all pages and sections.
+   ========================================================================== */
+
+:root,
+html,
+html.site-theme {
+  color-scheme: light;
+  --bg: #eeeeee;
+  --fg: #343434;
+  --fg-2: #585858;
+  --fg-muted: #646464;
+  --card: rgba(248, 253, 255, .62);
+  --card-hover: #f4fbff;
+  --line: rgba(131, 131, 131, .18);
+  --line-strong: rgba(131, 131, 131, .34);
+  --accent-glow: rgba(181, 181, 181, .2);
+  --theme-accent: #484848;
+  --theme-accent-soft: #eeeeee;
+  --theme-blue: #eaeaea;
+  --theme-ink: #303030;
+  --theme-action: linear-gradient(110deg, #b8b8b8 0%, #bcbcbc 48%, #c5c5c5 100%);
+  --theme-action-hover: linear-gradient(110deg, #ababab 0%, #b1b1b1 48%, #b9b9b9 100%);
+  --theme-glass: linear-gradient(135deg, rgba(255, 255, 255, .82), rgba(242, 250, 255, .55) 55%, rgba(233, 233, 233, .42));
+  --theme-shadow: 0 12px 32px rgba(97, 97, 97, .075), inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -1px 0 rgba(220, 220, 220, .3);
+}
+
+body,
+.site-theme body {
+  background:
+    radial-gradient(ellipse 1100px 650px at 5% 20%, rgba(230, 230, 230, .75), transparent 75%),
+    radial-gradient(ellipse 1100px 900px at 100% 55%, rgba(216, 216, 216, .42), transparent 75%),
+    radial-gradient(ellipse 1000px 900px at 10% 90%, rgba(232, 232, 232, .8), transparent 75%),
+    var(--bg);
+  color: var(--fg);
+}
+
+::selection,
+.site-theme ::selection {
+  background: #d9d9d9;
+  color: var(--theme-ink);
+}
+
+/* White glass navigation, with restrained silver-grey actions. */
+:is(.hp-nav, .hp-mbar),
+.site-theme :is(.hp-nav, .hp-mbar) {
+  background: rgba(248, 252, 255, .84) !important;
+  border-color: rgba(255, 255, 255, .94) !important;
+  box-shadow: var(--theme-shadow) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.hp-nav .hp-logo img,
+.hp-mbar .hp-logo img,
+.drawer-header .hp-logo img,
+.footer-logo img {
+  filter: brightness(0) !important;
+}
+
+.nav-link,
+.site-theme .nav-link {
+  color: var(--fg-2) !important;
+}
+
+:is(.nav-link:hover, .hp-burger:hover),
+.site-theme :is(.nav-link:hover, .hp-burger:hover) {
+  color: var(--theme-accent) !important;
+  background: var(--theme-accent-soft) !important;
+}
+
+:is(.btn-primary-agency, .get-started-btn),
+.site-theme :is(.btn-primary-agency, .get-started-btn) {
+  background: var(--theme-action) !important;
+  color: var(--theme-ink) !important;
+  box-shadow: 0 5px 16px rgba(138, 138, 138, .2), inset 0 1px 1px rgba(255, 255, 255, .7) !important;
+}
+
+:is(.btn-primary-agency, .get-started-btn):hover,
+.site-theme :is(.btn-primary-agency, .get-started-btn):hover {
+  background: var(--theme-action-hover) !important;
+  color: var(--theme-ink) !important;
+  box-shadow: 0 8px 24px rgba(138, 138, 138, .24), inset 0 1px 1px rgba(255, 255, 255, .7) !important;
+}
+
+.btn-inquire-nav,
+.site-theme .btn-inquire-nav {
+  background: var(--theme-action) !important;
+  color: var(--theme-ink) !important;
+  box-shadow: 0 4px 14px rgba(138, 138, 138, .18), inset 0 1px 1px rgba(255, 255, 255, .7) !important;
+}
+
+.btn-inquire-nav:hover,
+.site-theme .btn-inquire-nav:hover {
+  background: var(--theme-action-hover) !important;
+  color: var(--theme-ink) !important;
+  box-shadow: 0 6px 18px rgba(138, 138, 138, .23) !important;
+}
+
+:is(.btn-secondary-agency, .quick-link),
+.site-theme :is(.btn-secondary-agency, .quick-link) {
+  background: var(--theme-glass) !important;
+  color: var(--fg) !important;
+  border-color: var(--line-strong) !important;
+  box-shadow: var(--theme-shadow) !important;
+}
+
+:is(.btn-secondary-agency, .quick-link):hover,
+.site-theme :is(.btn-secondary-agency, .quick-link):hover {
+  color: var(--theme-accent) !important;
+  background: #f3f3f3 !important;
+  border-color: #aeaeae !important;
+}
+
+:is(a, button, input, select, textarea):focus-visible,
+.site-theme :is(a, button, input, select, textarea):focus-visible {
+  outline-color: var(--theme-accent) !important;
+}
+
+#mobile-menu-drawer,
+.site-theme #mobile-menu-drawer {
+  background: rgba(246, 246, 246, .98) !important;
+}
+
+:is(.drawer-close-btn, .mobile-nav-link),
+.site-theme :is(.drawer-close-btn, .mobile-nav-link) {
+  color: var(--fg) !important;
+}
+
+.mobile-nav-link,
+.site-theme .mobile-nav-link {
+  border-color: var(--line) !important;
+}
+
+/* Asymmetric silver-grey light, with broad, softly reflected highlights. */
+.hero-scroll-container,
+.site-theme .hero-scroll-container {
+  background:
+    linear-gradient(122deg, transparent 30%, rgba(255, 255, 255, .56) 44%, transparent 55%),
+    radial-gradient(ellipse at 94% 20%, rgba(164, 164, 164, .48), transparent 62%),
+    radial-gradient(ellipse at 78% 82%, rgba(189, 189, 189, .29), transparent 52%),
+    linear-gradient(110deg, #f6faff 5%, #f2f2f2 49%, #dcdcdc 100%) !important;
+}
+
+.hero-scroll-vignette,
+.site-theme .hero-scroll-vignette {
+  box-shadow: inset 0 0 140px 50px rgba(244, 244, 244, .6) !important;
+  background: radial-gradient(circle at center, transparent 35%, rgba(244, 244, 244, .38) 100%) !important;
+}
+
+.hero-scroll-center-glow,
+.site-theme .hero-scroll-center-glow {
+  background: radial-gradient(ellipse closest-side at center, rgba(246, 251, 255, .98) 0%,
+    rgba(244, 244, 244, .82) 45%, rgba(240, 240, 240, .25) 75%, rgba(237, 237, 237, 0) 100%) !important;
+}
+
+:is(.hero-title, .hero-subtitle, .hero-benefits-row),
+.site-theme :is(.hero-title, .hero-subtitle, .hero-benefits-row) {
+  text-shadow: none !important;
+}
+
+:is(.hero-badge-agency, .hero-scroll-indicator),
+.site-theme :is(.hero-badge-agency, .hero-scroll-indicator) {
+  color: var(--theme-accent) !important;
+  background: rgba(246, 252, 255, .82) !important;
+  border-color: var(--line) !important;
+  box-shadow: var(--theme-shadow) !important;
+}
+
+:is(.badge-dot, .hero-scroll-indicator .scroll-indicator-dot, .ugc-eyebrow > span),
+.site-theme :is(.badge-dot, .hero-scroll-indicator .scroll-indicator-dot) {
+  background: #b4b4b4 !important;
+  box-shadow: 0 0 10px rgba(187, 187, 187, .22) !important;
+}
+
+:is(.word-spinner, .section-tag, .step-num, .founder-role, .faq-acc-icon, .ugc-eyebrow),
+.site-theme :is(.word-spinner, .section-tag, .step-num, .founder-role, .faq-acc-icon) {
+  color: var(--theme-accent) !important;
+}
+
+.hero-canvas-card,
+.site-theme .hero-canvas-card {
+  border-color: rgba(255, 255, 255, .88) !important;
+  box-shadow: 0 10px 30px rgba(93, 93, 93, .14), 0 1px 3px rgba(93, 93, 93, .07) !important;
+}
+
+.hero-canvas-card:hover,
+.site-theme .hero-canvas-card:hover {
+  border-color: #dadada !important;
+  box-shadow: 0 16px 45px rgba(93, 93, 93, .18) !important;
+}
+
+:is(.hero-card-visa-blue, .hero-card-fluid-gradient),
+.site-theme :is(.hero-card-visa-blue, .hero-card-fluid-gradient) {
+  background: linear-gradient(145deg, #f2f9ff 0%, #dddddd 45%, #ededed 100%) !important;
+  color: var(--fg) !important;
+}
+
+:is(.hero-card-silver, .hero-card-pearl-white, .hero-card-dashboard),
+.site-theme :is(.hero-card-silver, .hero-card-pearl-white, .hero-card-dashboard) {
+  background: linear-gradient(135deg, #fafdff 0%, #e6e6e6 38%, #f1faff 54%, #e5e5e5 100%) !important;
+  border-color: rgba(255, 255, 255, .9) !important;
+  color: var(--fg) !important;
+}
+
+:is(.hero-card-silver, .hero-card-pearl-white) [style*="color:"],
+.site-theme :is(.hero-card-silver, .hero-card-pearl-white) [style*="color:"] {
+  color: var(--fg) !important;
+}
+
+.hero-card-pearl-white :is(.hero-visa-logo-text, .hero-visa-brand-text, .hero-visa-dots-num, .hero-visa-subtag),
+.site-theme .hero-card-pearl-white :is(.hero-visa-logo-text, .hero-visa-brand-text, .hero-visa-dots-num, .hero-visa-subtag) {
+  color: var(--fg) !important;
+}
+
+.hero-visa-brand-text::before,
+.site-theme .hero-visa-brand-text::before {
+  background: #adadad !important;
+}
+
+.hero-dash-badge,
+.site-theme .hero-dash-badge {
+  background: var(--theme-accent-soft) !important;
+  color: var(--theme-accent) !important;
+}
+
+.hero-dash-bar-bg,
+.site-theme .hero-dash-bar-bg {
+  background: #e4e4e4 !important;
+}
+
+.hero-dash-bar-fill,
+.site-theme .hero-dash-bar-fill {
+  background: #c1c1c1 !important;
+}
+
+.hero-dash-bar-fill.active,
+.site-theme .hero-dash-bar-fill.active {
+  background: #b9b9b9 !important;
+  box-shadow: 0 0 8px #d5d5d580 !important;
+}
+
+/* Soft charcoal glass overlays remain readable over full-colour portfolio media. */
+:is(.hero-canvas-card .card-tag, .ugc-sound-label, .ugc-duration, .creative-project-badge, .creative-project-hint),
+.site-theme .hero-canvas-card .card-tag {
+  background: rgba(48, 48, 48, .87) !important;
+  border-color: #f4f4f455 !important;
+  color: #f5fbff !important;
+}
+
+.hero-canvas-card .card-info,
+.site-theme .hero-canvas-card .card-info {
+  background: linear-gradient(to top, rgba(41, 41, 41, .96), rgba(41, 41, 41, .68) 60%, transparent) !important;
+}
+
+.hero-canvas-card .card-desc,
+.site-theme .hero-canvas-card .card-desc {
+  color: #e4e4e4 !important;
+}
+
+.make-media,
+.site-theme .make-media {
+  background: linear-gradient(145deg, #ededed, #e5e5e5) !important;
+}
+
+:is(#services .service-media-controls::before, .ugc-controls),
+.site-theme #services .service-media-controls::before {
+  background: linear-gradient(transparent, rgba(41, 41, 41, .68)) !important;
+}
+
+:is(#services .service-media-controls button, #services .service-media-count, .ugc-controls button),
+.site-theme #services :is(.service-media-controls button, .service-media-count) {
+  background: rgba(48, 48, 48, .94) !important;
+  border-color: #f4f4f455 !important;
+  color: #f5fbff !important;
+}
+
+:is(#services .service-media-controls button:hover, .ugc-controls button:hover),
+.site-theme #services .service-media-controls button:hover {
+  background: #585858 !important;
+}
+
+:is(#services .service-media-controls [aria-pressed="true"], .ugc-sound[aria-pressed="true"] .ugc-sound-label, .creative-project-card:hover .creative-project-hint, .creative-project-trigger:focus-visible .creative-project-hint),
+.site-theme #services .service-media-controls [aria-pressed="true"] {
+  background: #e9e9e9 !important;
+  color: var(--theme-ink) !important;
+  border-color: transparent !important;
+}
+
+.ugc-error {
+  background: rgba(48, 48, 48, .96) !important;
+  border: 1px solid #f4f4f455 !important;
+  color: #f5fbff !important;
+}
+
+/* Gentle transparency, white rim light and a consistent neutral ambient shadow. */
+:is(.make-card, .process-step-card, .comp-box, .package-card,
+  .founder-card, .faq-acc-item, .contact-card, .ugc-media, .creative-dialog),
+.site-theme :is(.make-card, .process-step-card, .comp-box, .package-card,
+  .founder-card, .faq-acc-item, .contact-card) {
+  background: var(--theme-glass) !important;
+  border-color: rgba(255, 255, 255, .88) !important;
+  box-shadow: var(--theme-shadow) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+:is(.make-card, .package-card, .ugc-media):hover,
+.site-theme :is(.make-card, .package-card):hover {
+  border-color: #cecece !important;
+}
+
+.faq-acc-item.open,
+.site-theme .faq-acc-item.open {
+  border-color: var(--line-strong) !important;
+}
+
+:is(.metrics-band, .partners-section, .packages-section, .combined-packages-section, .next-section-demo),
+.site-theme :is(.metrics-band, .partners-section, .packages-section) {
+  background: linear-gradient(115deg, rgba(255, 255, 255, .22), rgba(233, 233, 233, .17)) !important;
+}
+
+:is(.partner-logo-item, .partner-logo-icon, .partner-logo-text,
+  .comp-title-bright, .popover-item-title, .see-what-trigger, .package-price-tag,
+  .package-price-main .currency-symbol, .package-price-main .price-number,
+  .ugc-card h3, .pricing-usd, .creative-dialog h2, .ugc-work-title h2, .ugc-cta h2),
+.site-theme :is(.partner-logo-item, .partner-logo-icon, .partner-logo-text,
+  .comp-title-bright, .popover-item-title, .see-what-trigger, .package-price-tag,
+  .package-price-main .currency-symbol, .package-price-main .price-number) {
+  color: var(--fg) !important;
+}
+
+.partner-logo-icon,
+.site-theme .partner-logo-icon {
+  fill: currentColor !important;
+}
+
+.comp-box:not(.whyt-highlight) .comp-icon,
+.site-theme .comp-box:not(.whyt-highlight) .comp-icon {
+  filter: grayscale(1) !important;
+}
+
+.what-you-get-popover,
+.site-theme .what-you-get-popover {
+  background: rgba(242, 250, 255, .97) !important;
+}
+
+:is(.comp-box.whyt-highlight, .package-card.featured),
+.site-theme :is(.comp-box.whyt-highlight, .package-card.featured) {
+  border-color: #c5c5c5 !important;
+  background: linear-gradient(145deg, rgba(250, 253, 255, .9), rgba(234, 234, 234, .7) 50%, rgba(238, 238, 238, .65)) !important;
+  box-shadow: var(--theme-shadow), 0 0 24px rgba(198, 198, 198, .12) !important;
+}
+
+:is(.comp-pill-badge, .package-badge, .portfolio-switcher a[aria-current="page"]),
+.site-theme :is(.comp-pill-badge, .package-badge) {
+  background: var(--theme-action) !important;
+  color: var(--theme-ink) !important;
+  border-color: #b2b2b2 !important;
+}
+
+:is(.package-duration-pill, .slider-val-display, .service-chip, .ugc-count, .portfolio-switcher a, .ugc-toggle-all, .creative-fullscreen, .creative-original, .creative-dialog-close, .creative-gallery-arrow, .creative-thumbnails button),
+.site-theme :is(.package-duration-pill, .slider-val-display, .service-chip) {
+  background: #ededed !important;
+  border-color: #d7d7d7 !important;
+  color: #565656 !important;
+}
+
+:is(.portfolio-switcher a, .ugc-toggle-all, .creative-fullscreen, .creative-original, .creative-dialog-close, .creative-gallery-arrow):hover {
+  background: #f3f3f3 !important;
+  border-color: #aeaeae !important;
+  color: var(--theme-accent) !important;
+}
+
+.creative-thumbnails button[aria-current="true"] {
+  border-color: var(--theme-accent) !important;
+  opacity: 1 !important;
+}
+
+.creative-dialog::backdrop {
+  background: rgba(48, 48, 48, .45) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.duration-slider-container,
+.site-theme .duration-slider-container {
+  background: rgba(239, 239, 239, .7) !important;
+  border-color: var(--line) !important;
+}
+
+.custom-slider-wrapper::before,
+.site-theme .custom-slider-wrapper::before {
+  background: #dfdfdf !important;
+}
+
+.slider-track-fill,
+.site-theme .slider-track-fill {
+  background: var(--theme-action) !important;
+}
+
+.slider-thumb-custom,
+.site-theme .slider-thumb-custom {
+  background: var(--theme-action) !important;
+  box-shadow: 0 4px 14px rgba(130, 130, 130, .22), inset 0 1px 1px rgba(255, 255, 255, .8) !important;
+}
+
+.thumb-arrows,
+.site-theme .thumb-arrows {
+  color: var(--theme-ink) !important;
+}
+
+:is(.slider-tick.active, .slider-tick:hover, .package-volume-note, .check-icon),
+.site-theme :is(.slider-tick.active, .slider-tick:hover, .package-volume-note, .check-icon) {
+  color: var(--theme-accent) !important;
+}
+
+/* Clear form contrast and the same neutral treatment for every state. */
+:is(#contact, .contact-section) :is(.form-input, .form-select, .form-textarea),
+.site-theme #contact :is(.form-input, .form-select, .form-textarea) {
+  color-scheme: light !important;
+  color: var(--fg) !important;
+  background: rgba(252, 254, 255, .72) !important;
+}
+
+:is(#contact, .contact-section) .form-select option,
+.site-theme #contact .form-select option {
+  color: var(--fg) !important;
+  background: #f4faff !important;
+}
+
+:is(#contact, .contact-section) :is(.form-input:focus, .form-select:focus, .form-textarea:focus,
+  .form-select-wrap:focus-within .form-select-display),
+.site-theme #contact :is(.form-input:focus, .form-select:focus, .form-textarea:focus,
+  .form-select-wrap:focus-within .form-select-display) {
+  border-color: #8c8c8c !important;
+  background: #fafdff !important;
+  box-shadow: 0 0 0 3px rgba(174, 174, 174, .2) !important;
+}
+
+:is(.service-chip.active, .service-chip:hover),
+.site-theme :is(.service-chip.active, .service-chip:hover) {
+  background: var(--theme-action) !important;
+  border-color: #b2b2b2 !important;
+  color: var(--theme-ink) !important;
+}
+
+.toast-msg,
+.site-theme .toast-msg {
+  background: #eeeeee !important;
+  border-color: #d0d0d0 !important;
+  color: var(--fg) !important;
+}
+
+.site-footer,
+.site-theme .site-footer {
+  background: linear-gradient(120deg, rgba(244, 250, 255, .7), rgba(229, 229, 229, .62)) !important;
+}
+
+:is(.foot-link:hover, .more-info-link:hover, .ugc-text-link:hover, .ugc-back:hover),
+.site-theme :is(.foot-link:hover, .more-info-link:hover) {
+  color: var(--theme-accent) !important;
+}
