@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://whyt.studio/sitemap.xml
+Sitemap: https://whyt.studio/image-sitemap.xml

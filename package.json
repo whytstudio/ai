@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "build:service-media": "node scripts/build-service-media.cjs",
+    "build:commercial-portfolio": "node scripts/build-commercial-portfolio.cjs",
+    "build:creative-images": "node scripts/build-creative-image-portfolio.cjs",
+    "build:images": "node scripts/build-creative-image-portfolio.cjs && node scripts/optimize-site-images.cjs",
+    "validate": "node scripts/validate-site.cjs"
+  },
+  "name": "whty.studio",
+  "private": true
+}
